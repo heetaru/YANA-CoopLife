@@ -1,6 +1,7 @@
 package org.example.yanacooplife.config;
 
 import lombok.RequiredArgsConstructor;
+import org.example.yanacooplife.security.CustomAuthenticationEntryPoint;
 import org.example.yanacooplife.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -32,6 +34,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable) // Налаштуєш CORS пізніше за потреби
+                .exceptionHandling(
+                        exception -> exception
+                                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll() // Дозволяємо доступ до логіну та реєстрації
                         .requestMatchers(HttpMethod.GET, "/users").permitAll()

@@ -33,17 +33,6 @@ public class UserController {
                 .body(userService.getAllUsers());
     }
 
-    @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(
-            @Valid @RequestBody UserCreateDto userToCreate
-    ){
-        logger.info("Called method createUser");
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(userService.createUser(
-                        userToCreate
-                ));
-    }
-
     @PostMapping("/{userId}/tasks")
     public ResponseEntity<TaskDto> createTask(
             @PathVariable("userId") Long userId,

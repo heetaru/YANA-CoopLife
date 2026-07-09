@@ -11,6 +11,7 @@ import org.example.yanacooplife.mapper.UserMapper;
 import org.example.yanacooplife.repository.TaskRepository;
 import org.example.yanacooplife.repository.UserRepository;
 import org.jspecify.annotations.Nullable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final TaskRepository taskRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
     private final TaskMapper taskMapper;
@@ -39,6 +41,8 @@ public class UserService {
             throw new EntityNotFoundException("Your email was used to another account");
         }
         User newUser = userMapper.toEntity(userToCreate);
+
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         User savedUser = userRepository.save(newUser);
 

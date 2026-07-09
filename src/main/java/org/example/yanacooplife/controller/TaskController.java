@@ -1,5 +1,6 @@
 package org.example.yanacooplife.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.example.yanacooplife.dto.TaskDto;
 import org.example.yanacooplife.service.TaskService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/tasks")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Bearer Authentication")
 public class TaskController {
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class);
 

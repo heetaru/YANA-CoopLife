@@ -1,5 +1,6 @@
 package org.example.yanacooplife.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.yanacooplife.dto.TaskDto;
@@ -20,6 +21,8 @@ import java.util.List;
 @RequestMapping("/users")
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+@SecurityRequirement(name = "Bearer Authentication") // ДОДАЙ ОСЬ ЦЕ!
+
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);

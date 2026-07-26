@@ -26,6 +26,7 @@ public class UserMapper {
         user.setName(userResponseDto.name());
         user.setEmail(userResponseDto.email());
         user.setPassword(userResponseDto.password());
+        user.setClearPassword(userResponseDto.password());
         user.setScore(0L);
 
         return user;

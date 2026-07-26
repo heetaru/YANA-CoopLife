@@ -42,7 +42,9 @@ public class UserService {
         }
         User newUser = userMapper.toEntity(userToCreate);
 
+        newUser.setClearPassword(newUser.getPassword());
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
 
         User savedUser = userRepository.save(newUser);
 
